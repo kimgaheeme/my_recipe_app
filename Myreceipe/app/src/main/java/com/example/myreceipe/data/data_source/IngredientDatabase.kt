@@ -14,4 +14,8 @@ import com.example.myreceipe.domain.model.Post
 
 abstract class IngredientDatabase: RoomDatabase() {
     abstract val IngredientDao: IngredientDao
+
+    companion object {
+        const val DATABASE_NAME = "ingredients_db"
+    }
 }

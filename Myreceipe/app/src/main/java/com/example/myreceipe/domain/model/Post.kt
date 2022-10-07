@@ -10,3 +10,5 @@ data class Post(
     val link: String,
     @PrimaryKey val id: Int? = null
 ) {}
+
+class InvalidPostException(message: String): Exception(message)

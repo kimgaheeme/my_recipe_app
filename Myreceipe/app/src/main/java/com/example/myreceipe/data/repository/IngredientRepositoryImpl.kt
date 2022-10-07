@@ -1,5 +1,6 @@
 package com.example.myreceipe.data.repository
 
+import com.example.myreceipe.data.data_source.IngredientDao
 import com.example.myreceipe.data.data_source.PostDao
 import com.example.myreceipe.domain.model.Ingredient
 import com.example.myreceipe.domain.model.Post
@@ -8,7 +9,7 @@ import com.example.myreceipe.domain.repository.PostRepository
 import kotlinx.coroutines.flow.Flow
 
 class IngredientRepositoryImpl(
-    private val dao: IngredientRepository
+    private val dao: IngredientDao
     ): IngredientRepository {
     override fun getIngredient(): Flow<List<Ingredient>> {
         return dao.getIngredient()

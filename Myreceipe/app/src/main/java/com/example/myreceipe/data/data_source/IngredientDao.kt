@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.Flow
 interface IngredientDao {
 
     @Query("SELECT * FROM ingredient")
-    fun getIngredient(): Flow<List<String>>
+    fun getIngredient(): Flow<List<Ingredient>>
 
     @Query("SELECT * FROM ingredient WHERE name LIKE  :name")
-    fun getIngredientByName(name: String): Flow<List<String>>
+    fun getIngredientByName(name: String): Flow<List<Ingredient>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIngredient(ingredient: Ingredient)
