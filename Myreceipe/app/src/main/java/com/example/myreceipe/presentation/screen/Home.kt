@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.myreceipe.presentation.component.SubTitleText
 import com.example.myreceipe.presentation.util.Screen
 import com.example.myreceipe.presentation.viewModel.PostViewModel
 import com.example.myreceipe.ui.theme.*
@@ -46,9 +47,7 @@ fun Home(
         }}
     ) {
 
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
+        LazyColumn() {
             item {
                 Row(
                     modifier = Modifier
@@ -71,16 +70,7 @@ fun Home(
 
                 }
 
-                Text(
-                    "Filter",
-                    fontFamily = SpoqaHanSansNeo,
-                    fontWeight = FontWeight.Medium,
-                    color = Gray700,
-                    fontSize = 16.sp,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 35.dp, bottom = 10.dp)
-                )
+                SubTitleText(text = "Filter")
 
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(5.dp),
@@ -115,16 +105,9 @@ fun Home(
                     }
                 }
 
-                Text(
-                    "Menu",
-                    fontFamily = SpoqaHanSansNeo,
-                    fontWeight = FontWeight.Medium,
-                    color = Gray700,
-                    fontSize = 16.sp,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 35.dp, bottom = 2.dp, top = 40.dp)
-                )
+                Spacer(modifier = Modifier.size(40.dp))
+                
+                SubTitleText(text = "Menu")
             }
 
             items(state.posts) { it ->
@@ -132,7 +115,7 @@ fun Home(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable { navController.navigate("${Screen.PostDetail.root}/${it.id}") }
-                        .padding(horizontal = 20.dp),
+                        .padding(horizontal = 20.dp, vertical = 4.dp),
                     shape = RoundedCornerShape(20.dp)
                 ) {
                     Column(
