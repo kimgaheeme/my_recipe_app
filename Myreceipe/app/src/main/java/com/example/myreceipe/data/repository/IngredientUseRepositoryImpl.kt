@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 class IngredientUseRepositoryImpl(
     private val dao: IngredientUseDao
     ): IngredientUseRepository {
-    override fun getIngredientUse(): Flow<List<Post>> {
+    override fun getIngredientUse(): Flow<List<IngredientUse>> {
         return dao.getIngredientUse()
     }
 

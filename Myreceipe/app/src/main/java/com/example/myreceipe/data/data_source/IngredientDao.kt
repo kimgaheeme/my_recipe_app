@@ -1,13 +1,11 @@
 package com.example.myreceipe.data.data_source
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.myreceipe.domain.model.Ingredient
 import com.example.myreceipe.domain.model.Post
 import kotlinx.coroutines.flow.Flow
 
+@Dao
 interface IngredientDao {
 
     @Query("SELECT * FROM ingredient")

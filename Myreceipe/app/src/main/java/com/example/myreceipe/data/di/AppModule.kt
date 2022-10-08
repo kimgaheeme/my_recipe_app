@@ -2,13 +2,10 @@ package com.example.myreceipe.data.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.myreceipe.data.data_source.IngredientDatabase
-import com.example.myreceipe.data.data_source.IngredientUseDatabase
 import com.example.myreceipe.data.data_source.PostDatabase
 import com.example.myreceipe.data.repository.IngredientRepositoryImpl
 import com.example.myreceipe.data.repository.IngredientUseRepositoryImpl
 import com.example.myreceipe.data.repository.PostRepositoryImpl
-import com.example.myreceipe.domain.model.Post
 import com.example.myreceipe.domain.repository.AddPost
 import com.example.myreceipe.domain.repository.IngredientRepository
 import com.example.myreceipe.domain.repository.IngredientUseRepository
@@ -37,7 +34,7 @@ object AppModule {
     @Provides
     @Singleton
     fun providePostRepository(db: PostDatabase) : PostRepository {
-        return PostRepositoryImpl(db.PostDao)
+        return PostRepositoryImpl(db.postDao)
     }
 
     @Provides
@@ -51,20 +48,11 @@ object AppModule {
         )
     }
 
-    @Provides
-    @Singleton
-    fun provideIngredientDatabase(app: Application): IngredientDatabase {
-        return Room.databaseBuilder(
-            app,
-            IngredientDatabase::class.java,
-            IngredientDatabase.DATABASE_NAME
-        ).build()
-    }
 
     @Provides
     @Singleton
-    fun provideIngredientRepository(db: IngredientDatabase) : IngredientRepository {
-        return IngredientRepositoryImpl(db.IngredientDao)
+    fun provideIngredientRepository(db: PostDatabase) : IngredientRepository {
+        return IngredientRepositoryImpl(db.ingredientDao)
     }
 
     @Provides
@@ -76,20 +64,11 @@ object AppModule {
         )
     }
 
-    @Provides
-    @Singleton
-    fun provideIngredientUseDatabase(app: Application): IngredientUseDatabase {
-        return Room.databaseBuilder(
-            app,
-            IngredientUseDatabase::class.java,
-            IngredientUseDatabase.DATABASE_NAME
-        ).build()
-    }
 
     @Provides
     @Singleton
-    fun provideIngredientUseRepository(db: IngredientUseDatabase) : IngredientUseRepository {
-        return IngredientUseRepositoryImpl(db.IngredientUseDao)
+    fun provideIngredientUseRepository(db: PostDatabase) : IngredientUseRepository {
+        return IngredientUseRepositoryImpl(db.ingredientUseDao)
     }
 
 

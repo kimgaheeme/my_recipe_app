@@ -14,21 +14,25 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.myreceipe.presentation.util.Screen
 import com.example.myreceipe.presentation.viewModel.PostViewModel
 
 @Composable
-fun Home() {
+fun Home(
+    navController: NavController
+) {
 
     val viewModel = hiltViewModel<PostViewModel>()
     val state by viewModel.state
 
     Scaffold(
-        floatingActionButton = { Button(onClick = { /*TODO*/ }) {
+        floatingActionButton = { Button(onClick = { navController.navigate(Screen.AddPost.root) }) {
             Text("+")
         }}
     ) {
 
-
+        it
         LazyColumn() {
             items(state.posts) { it ->
                 Card(modifier = Modifier.fillMaxWidth().height(20.dp)) {
