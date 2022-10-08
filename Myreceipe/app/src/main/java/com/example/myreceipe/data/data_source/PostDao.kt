@@ -16,6 +16,9 @@ interface PostDao {
     @Query("SELECT * FROM post WHERE title LIKE :title")
     fun getPostByTitle(title: String): Flow<List<Post>>
 
+    @Query("SELECT * FROM post WHERE id = :id")
+    fun getPostById(id: Int): Post?
+
     @Query(
         "SELECT * FROM post " +
         "INNER JOIN ingredientuse ON ingredientuse.postId = id " +

@@ -46,7 +46,8 @@ object AppModule {
         return PostUseCase(
             getPost = GetPostUseCase(repository),
             deletePost = DeletePostUseCase(repository),
-            addPost = AddPost(repository)
+            addPost = AddPost(repository),
+            getPostDetail = GetPostDetail(repository)
         )
     }
 

@@ -16,6 +16,10 @@ class PostRepositoryImpl(
         return dao.getPostByTitle(title)
     }
 
+    override fun getPostById(id: Int): Post? {
+        return dao.getPostById(id)
+    }
+
     override fun getPostByIngredient(ingredientsId: List<Int>): Flow<List<Post>> {
         return dao.getPostByIngredient(ingredientsId)
     }
