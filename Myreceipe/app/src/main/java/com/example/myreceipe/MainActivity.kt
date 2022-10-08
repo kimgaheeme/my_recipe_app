@@ -15,6 +15,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.myreceipe.presentation.screen.AddPost
 import com.example.myreceipe.presentation.screen.Home
+import com.example.myreceipe.presentation.screen.PostDetail
+import com.example.myreceipe.presentation.util.Key
 import com.example.myreceipe.presentation.util.Screen
 import com.example.myreceipe.ui.theme.MyreceipeTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +37,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(route = Screen.AddPost.root) {
                         AddPost(navController)
+                    }
+                    composable(route = "${Screen.PostDetail.root}/{${Key.PostDetail.root}}") {
+                        PostDetail(navController)
                     }
                 }
             }
