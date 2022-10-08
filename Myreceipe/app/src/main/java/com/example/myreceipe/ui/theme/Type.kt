@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.myreceipe.R
 
-private val SpoqaHanSansNeo = FontFamily(
+val SpoqaHanSansNeo = FontFamily(
     Font(R.font.spoqahansansneo_regular, FontWeight.Normal),
     Font(R.font.spoqahansansneo_bold, FontWeight.Bold),
     Font(R.font.spoqahansansneo_light, FontWeight.Light),
