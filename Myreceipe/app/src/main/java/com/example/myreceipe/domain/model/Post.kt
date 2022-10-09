@@ -5,10 +5,9 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Post(
-    val title: String,
+    @PrimaryKey val title: String,
     val content: String,
-    val link: String,
-    @PrimaryKey val id: Int? = null
+    val link: String
 ) {}
 
 class InvalidPostException(message: String): Exception(message)

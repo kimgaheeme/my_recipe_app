@@ -7,5 +7,5 @@ sealed class Screen(val root: String) {
 }
 
 sealed class Key(val root: String) {
-    object PostDetail : Key(root = "post_detail_id")
+    object PostDetail : Key(root = "title")
 }

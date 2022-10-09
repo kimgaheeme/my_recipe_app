@@ -12,14 +12,12 @@ interface PostDao {
     fun getPost(): Flow<List<Post>>
 
     @Query("SELECT * FROM post WHERE title LIKE :title")
-    fun getPostByTitle(title: String): Flow<List<Post>>
+    fun getPostByTitle(title: String): Post?
 
-    @Query("SELECT * FROM post WHERE id = :id")
-    fun getPostById(id: Int): Post?
 
     @Query(
         "SELECT * FROM post " +
-        "INNER JOIN ingredientUse ON ingredientUse.postId = id " +
+        "INNER JOIN ingredientUse ON ingredientUse.post = title " +
         "WHERE ingredientUse.ingredient IN (:ingredients)"
     )
     fun getPostByIngredient(ingredients: List<String>): Flow<List<Post>>

@@ -114,7 +114,7 @@ fun Home(
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { navController.navigate("${Screen.PostDetail.root}/${it.id}") }
+                        .clickable { navController.navigate("${Screen.PostDetail.root}/${it.title}") }
                         .padding(horizontal = 20.dp, vertical = 4.dp),
                     shape = RoundedCornerShape(20.dp)
                 ) {

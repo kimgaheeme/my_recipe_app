@@ -11,7 +11,8 @@ class AddIngredientUseUseCase(
     private val repository: IngredientUseRepository
 ) {
 
-    suspend operator fun invoke(ingredients: List<String>, id: Int) {
-        return ingredients.forEach { repository.insertIngredientUse(IngredientUse(id, it)) }
+    suspend operator fun invoke(ingredients: List<Pair<String, String>>, title: String) {
+        return ingredients.forEach {  it ->
+            repository.insertIngredientUse(IngredientUse(title, it.first, it.second )) }
     }
 }

@@ -8,7 +8,7 @@ class GetPostDetail(
     private val repository: PostRepository
 ) {
 
-    suspend operator fun invoke(id: Int): Post? {
-        return repository.getPostById(id)
+    suspend operator fun invoke(title: String): Post? {
+        return repository.getPostByTitle(title)
     }
 }

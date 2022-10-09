@@ -29,6 +29,8 @@ class PostViewModel @Inject constructor(
 
     private var getPostsJob: Job? = null
 
+    private var filter: List<String> = listOf("감자")
+
     init {
         getPosts(PostOrder.Title(OrderType.Descending))
     }
@@ -65,13 +67,24 @@ class PostViewModel @Inject constructor(
 
     private fun getPosts(postOrder: PostOrder) {
         getPostsJob?.cancel()
-        getPostsJob = postUseCase.getPost(postOrder)
-            .onEach { posts ->
-                _state.value = state.value.copy(
-                    posts = posts,
-                    postOrder = postOrder
-                )
-            }
-            .launchIn(viewModelScope)
+        if(filter.size != 0) {
+            getPostsJob = postUseCase.getPost(postOrder, filter)
+                .onEach { posts ->
+                    _state.value = state.value.copy(
+                        posts = posts,
+                        postOrder = postOrder
+                    )
+                }
+                .launchIn(viewModelScope)
+        } else {
+            getPostsJob = postUseCase.getPost(postOrder)
+                .onEach { posts ->
+                    _state.value = state.value.copy(
+                        posts = posts,
+                        postOrder = postOrder
+                    )
+                }
+                .launchIn(viewModelScope)
+        }
     }
 }

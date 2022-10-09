@@ -48,14 +48,12 @@ class AddViewModel @Inject constructor(
     private val _eventFlow = MutableSharedFlow<UiEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
-    private var currentPostId: Int? = null
 
     init {
-        savedStateHandle.get<Int>("postId")?.let { postId ->
-            if(postId != -1) {
+        savedStateHandle.get<String>("title")?.let { it ->
+            if(it != "") {
                 viewModelScope.launch {
-                    postUseCase.getPostDetail(postId)?.also { post ->
-                        currentPostId = post.id
+                    postUseCase.getPostDetail(it)?.also { post ->
                         _title.value = title.value.copy(
                             text = post.title,
                             isHintVisible = false
@@ -123,15 +121,18 @@ class AddViewModel @Inject constructor(
                             Post(
                                 title = title.value.text,
                                 content = content.value.text,
-                                link = link.value.text,
-                                id = currentPostId
+                                link = link.value.text
                             )
                         )
 
+                        var splitText = ingredient.value.text.split(",")
                         ingredientUseCase.addIngredient(
-                            
+                            splitText.map {it.split("/")[0].trim()}
                         )
-
+                        ingredientUseCase.addIngredientUse(
+                            splitText.map { it.split("/")[0].trim() to it.split("/")[1]},
+                            title = title.value.text ?: ""
+                        )
 
                         _eventFlow.emit(UiEvent.SavePost)
                     } catch(e: InvalidPostException) {

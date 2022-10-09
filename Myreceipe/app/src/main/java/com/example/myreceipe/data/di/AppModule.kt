@@ -28,7 +28,9 @@ object AppModule {
             app,
             PostDatabase::class.java,
             PostDatabase.DATABASE_NAME
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides
