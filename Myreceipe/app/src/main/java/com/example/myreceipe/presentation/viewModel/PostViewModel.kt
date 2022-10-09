@@ -1,9 +1,11 @@
 package com.example.myreceipe.presentation.viewModel
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myreceipe.domain.model.Post
+import com.example.myreceipe.domain.usecase.post.IngredientUseCase
 import com.example.myreceipe.domain.usecase.post.PostUseCase
 import com.example.myreceipe.domain.util.OrderType
 import com.example.myreceipe.domain.util.PostOrder
@@ -19,7 +21,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PostViewModel @Inject constructor(
-    private val postUseCase: PostUseCase
+    private val postUseCase: PostUseCase,
+    private val ingredientUseCase: IngredientUseCase
 ) : ViewModel() {
 
     private val _state = mutableStateOf(PostState())
@@ -29,10 +32,11 @@ class PostViewModel @Inject constructor(
 
     private var getPostsJob: Job? = null
 
-    private var filter: List<String> = listOf("감자")
+    var filter = mutableStateOf(listOf<String>())
 
     init {
         getPosts(PostOrder.Title(OrderType.Descending))
+        getIngredient()
     }
 
     fun onEvent(event : PostEvent) {
@@ -67,8 +71,8 @@ class PostViewModel @Inject constructor(
 
     private fun getPosts(postOrder: PostOrder) {
         getPostsJob?.cancel()
-        if(filter.size != 0) {
-            getPostsJob = postUseCase.getPost(postOrder, filter)
+        if(filter.value.size != 0) {
+            getPostsJob = postUseCase.getPost(postOrder, filter.value)
                 .onEach { posts ->
                     _state.value = state.value.copy(
                         posts = posts,
@@ -86,5 +90,20 @@ class PostViewModel @Inject constructor(
                 }
                 .launchIn(viewModelScope)
         }
+    }
+
+    private fun getIngredient() {
+        ingredientUseCase.getIngredientUseCase().onEach {
+            filter.value = it
+            Log.d("가희", filter.value.toString())
+        }.launchIn(viewModelScope)
+    }
+
+    fun plusIngredient(ingredient: String) {
+        filter.value = filter.value.plus(ingredient)
+    }
+
+    fun deleteIngredient(ingredient: String) {
+        filter.value = filter.value.filter { it != ingredient }
     }
 }

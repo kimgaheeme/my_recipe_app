@@ -63,7 +63,8 @@ object AppModule {
         return IngredientUseCase(
             addIngredient = AddIngredientUseCase(repository),
             addIngredientUse = AddIngredientUseUseCase(repository2),
-            deleteIngredient = DeleteIngredientUseCase(repository)
+            deleteIngredient = DeleteIngredientUseCase(repository),
+            getIngredientUseCase = GetIngredientUseCase(repository)
         )
     }
 

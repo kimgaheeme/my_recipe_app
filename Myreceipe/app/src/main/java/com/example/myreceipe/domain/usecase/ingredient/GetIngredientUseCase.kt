@@ -15,14 +15,14 @@ class GetIngredientUseCase(
 ) {
     operator fun invoke(
         ingredientOrder: IngredientOrder = IngredientOrder.Name(OrderType.Ascending)
-    ): Flow<List<Ingredient>> {
+    ): Flow<List<String>> {
         return repository.getIngredient().map { ingredients ->
             when(ingredientOrder.orderType) {
                 is OrderType.Ascending -> {
-                    ingredients.sortedBy { it.name.lowercase() }
+                    ingredients.sortedBy { it.lowercase() }
                 }
                 is OrderType.Descending -> {
-                    ingredients.sortedByDescending { it.name.lowercase() }
+                    ingredients.sortedByDescending { it.lowercase() }
                 }
             }
         }

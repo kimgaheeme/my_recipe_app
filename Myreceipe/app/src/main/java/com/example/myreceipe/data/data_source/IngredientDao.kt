@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface IngredientDao {
 
-    @Query("SELECT * FROM ingredient")
-    fun getIngredient(): Flow<List<Ingredient>>
+    @Query("SELECT name FROM ingredient")
+    fun getIngredient(): Flow<List<String>>
 
     @Query("SELECT * FROM ingredient WHERE name LIKE  :name")
     fun getIngredientByName(name: String): Flow<List<Ingredient>>

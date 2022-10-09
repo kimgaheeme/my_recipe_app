@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface IngredientRepository {
 
-    fun getIngredient(): Flow<List<Ingredient>>
+    fun getIngredient(): Flow<List<String>>
 
     fun getIngredientByName(name: String): Flow<List<Ingredient>>
 
