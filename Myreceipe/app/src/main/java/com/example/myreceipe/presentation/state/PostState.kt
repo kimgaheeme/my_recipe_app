@@ -7,6 +7,5 @@ import com.example.myreceipe.domain.util.PostOrder
 data class PostState(
     val posts : List<Post> = emptyList(),
     val postOrder : PostOrder = PostOrder.Title(OrderType.Descending),
-    val isOrderSectionVisible : Boolean = false,
-    val filter : List<Int> = emptyList()
+    val isOrderSectionVisible : Boolean = false
 )

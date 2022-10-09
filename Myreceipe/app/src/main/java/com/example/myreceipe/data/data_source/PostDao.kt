@@ -16,7 +16,7 @@ interface PostDao {
 
 
     @Query(
-        "SELECT * FROM post " +
+        "SELECT DISTINCT * FROM post " +
         "INNER JOIN ingredientUse ON ingredientUse.post = title " +
         "WHERE ingredientUse.ingredient IN (:ingredients)"
     )

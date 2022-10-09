@@ -28,74 +28,40 @@ class PostViewModel @Inject constructor(
     private val _state = mutableStateOf(PostState())
     val state = _state
 
-    private var recentlyDeletedPost: Post? = null
-
     private var getPostsJob: Job? = null
 
     var filter = mutableStateOf(listOf<String>())
+    var post = mutableStateOf(listOf<Post>())
+    var ingredient = mutableStateOf(listOf<String>())
 
     init {
-        getPosts(PostOrder.Title(OrderType.Descending))
+        getPosts()
         getIngredient()
     }
 
-    fun onEvent(event : PostEvent) {
-        when(event) {
-            is PostEvent.Order -> {
-                if(state.value.postOrder::class == event.postOrder::class &&
-                        state.value.postOrder.orderType == event.postOrder.orderType
-                ) {
-                    return
-                }
-                getPosts(event.postOrder)
-            }
-            is PostEvent.DeletePost -> {
-                viewModelScope.launch {
-                    postUseCase.deletePost(event.post)
-                    recentlyDeletedPost = event.post
-                }
-            }
-            is PostEvent.RestorePost -> {
-                viewModelScope.launch {
-                    postUseCase.addPost(recentlyDeletedPost ?: return@launch)
-                    recentlyDeletedPost = null
-                }
-            }
-            is PostEvent.ToggleOrderSection -> {
-                _state.value = state.value.copy(
-                    isOrderSectionVisible = !state.value.isOrderSectionVisible
-                )
-            }
-        }
-    }
+    fun getPosts(postOrder: PostOrder = PostOrder.Title(OrderType.Ascending)) {
 
-    private fun getPosts(postOrder: PostOrder) {
         getPostsJob?.cancel()
         if(filter.value.size != 0) {
             getPostsJob = postUseCase.getPost(postOrder, filter.value)
                 .onEach { posts ->
-                    _state.value = state.value.copy(
-                        posts = posts,
-                        postOrder = postOrder
-                    )
+                    post.value = posts.distinct()
                 }
                 .launchIn(viewModelScope)
         } else {
             getPostsJob = postUseCase.getPost(postOrder)
                 .onEach { posts ->
-                    _state.value = state.value.copy(
-                        posts = posts,
-                        postOrder = postOrder
-                    )
+                    post.value = posts.distinct()
                 }
                 .launchIn(viewModelScope)
         }
+
+
     }
 
     private fun getIngredient() {
         ingredientUseCase.getIngredientUseCase().onEach {
-            filter.value = it
-            Log.d("가희", filter.value.toString())
+            ingredient.value = it
         }.launchIn(viewModelScope)
     }
 
