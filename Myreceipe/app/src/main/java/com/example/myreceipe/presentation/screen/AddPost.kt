@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.myreceipe.domain.repository.AddPost
+import com.example.myreceipe.domain.usecase.post.AddPost
 import com.example.myreceipe.presentation.component.MyTextField
 import com.example.myreceipe.presentation.component.SubTitleText
 import com.example.myreceipe.presentation.event.AddPostEvent

@@ -29,9 +29,9 @@ class GetPostUseCase(
     //필터를 위한 것
     operator fun invoke(
         postOrder: PostOrder = PostOrder.Title(OrderType.Ascending),
-        ingredientsId: List<Int>
+        ingredients: List<String>
     ): Flow<List<Post>> {
-        return repository.getPostByIngredient(ingredientsId).map { posts ->
+        return repository.getPostByIngredient(ingredients).map { posts ->
             when(postOrder.orderType) {
                 is OrderType.Ascending -> {
                     posts.sortedBy { it.title.lowercase() }

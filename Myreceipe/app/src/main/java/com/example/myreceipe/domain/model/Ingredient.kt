@@ -5,6 +5,5 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Ingredient(
-    val name: String,
-    @PrimaryKey val id: Int? = null
+    @PrimaryKey val name: String
 ) {}

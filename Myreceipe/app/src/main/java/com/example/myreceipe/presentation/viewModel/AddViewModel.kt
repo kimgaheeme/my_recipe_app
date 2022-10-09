@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myreceipe.domain.model.InvalidPostException
 import com.example.myreceipe.domain.model.Post
 import com.example.myreceipe.domain.repository.PostRepository
+import com.example.myreceipe.domain.usecase.post.IngredientUseCase
 import com.example.myreceipe.domain.usecase.post.PostUseCase
 import com.example.myreceipe.presentation.event.AddPostEvent
 import com.example.myreceipe.presentation.state.PostTextFieldState
@@ -20,6 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AddViewModel @Inject constructor(
     private val postUseCase: PostUseCase,
+    private val ingredientUseCase: IngredientUseCase,
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
@@ -125,6 +127,12 @@ class AddViewModel @Inject constructor(
                                 id = currentPostId
                             )
                         )
+
+                        ingredientUseCase.addIngredient(
+                            
+                        )
+
+
                         _eventFlow.emit(UiEvent.SavePost)
                     } catch(e: InvalidPostException) {
                         _eventFlow.emit(

@@ -20,8 +20,8 @@ class PostRepositoryImpl(
         return dao.getPostById(id)
     }
 
-    override fun getPostByIngredient(ingredientsId: List<Int>): Flow<List<Post>> {
-        return dao.getPostByIngredient(ingredientsId)
+    override fun getPostByIngredient(ingredients: List<String>): Flow<List<Post>> {
+        return dao.getPostByIngredient(ingredients)
     }
 
     override suspend fun insertPost(post: Post) {

@@ -12,7 +12,7 @@ interface PostRepository {
     fun getPost(): Flow<List<Post>>
     fun getPostByTitle(title: String): Flow<List<Post>>
     fun getPostById(id: Int): Post?
-    fun getPostByIngredient(ingredientsId: List<Int>): Flow<List<Post>>
+    fun getPostByIngredient(ingredients: List<String>): Flow<List<Post>>
 
     suspend fun insertPost(post: Post)
     suspend fun deletePost(post: Post)

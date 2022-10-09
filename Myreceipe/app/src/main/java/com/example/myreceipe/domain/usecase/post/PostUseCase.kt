@@ -1,6 +1,6 @@
 package com.example.myreceipe.domain.usecase.post
 
-import com.example.myreceipe.domain.repository.AddPost
+import com.example.myreceipe.domain.usecase.post.AddPost
 
 data class PostUseCase(
     val getPost: GetPostUseCase,

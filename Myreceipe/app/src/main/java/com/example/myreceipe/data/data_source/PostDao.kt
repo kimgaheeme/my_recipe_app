@@ -20,9 +20,9 @@ interface PostDao {
     @Query(
         "SELECT * FROM post " +
         "INNER JOIN ingredientUse ON ingredientUse.postId = id " +
-        "WHERE ingredientUse.ingredientId IN (:ingredientsId)"
+        "WHERE ingredientUse.ingredient IN (:ingredients)"
     )
-    fun getPostByIngredient(ingredientsId: List<Int>): Flow<List<Post>>
+    fun getPostByIngredient(ingredients: List<String>): Flow<List<Post>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPost(post: Post)

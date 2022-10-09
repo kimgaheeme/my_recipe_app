@@ -6,7 +6,7 @@ import com.example.myreceipe.data.data_source.PostDatabase
 import com.example.myreceipe.data.repository.IngredientRepositoryImpl
 import com.example.myreceipe.data.repository.IngredientUseRepositoryImpl
 import com.example.myreceipe.data.repository.PostRepositoryImpl
-import com.example.myreceipe.domain.repository.AddPost
+import com.example.myreceipe.domain.usecase.post.AddPost
 import com.example.myreceipe.domain.repository.IngredientRepository
 import com.example.myreceipe.domain.repository.IngredientUseRepository
 import com.example.myreceipe.domain.repository.PostRepository
@@ -57,9 +57,10 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideIngredientUseCase(repository: IngredientRepository) : IngredientUseCase {
+    fun provideIngredientUseCase(repository: IngredientRepository, repository2: IngredientUseRepository) : IngredientUseCase {
         return IngredientUseCase(
-            getIngredient = GetIngredientUseCase(repository),
+            addIngredient = AddIngredientUseCase(repository),
+            addIngredientUse = AddIngredientUseUseCase(repository2),
             deleteIngredient = DeleteIngredientUseCase(repository)
         )
     }
