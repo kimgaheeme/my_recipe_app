@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface PostRepository {
 
     fun getPost(): Flow<List<Post>>
-    fun getPostByTitle(title: String): Post?
+    fun getPostByTitle(title: String): Flow<Post?>
     fun getPostByIngredient(ingredients: List<String>): Flow<List<Post>>
 
     suspend fun insertPost(post: Post)

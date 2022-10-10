@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface IngredientUseRepository {
 
-    fun getIngredientUse(): Flow<List<IngredientUse>>
+    fun getIngredientUse(post: String): Flow<List<IngredientUse>>
 
     suspend fun insertIngredientUse(ingredientUse: IngredientUse)
 

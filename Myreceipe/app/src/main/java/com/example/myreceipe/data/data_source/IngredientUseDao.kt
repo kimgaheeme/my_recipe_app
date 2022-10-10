@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface IngredientUseDao {
 
-    @Query("SELECT * FROM ingredientUse")
-    fun getIngredientUse(): Flow<List<IngredientUse>>
+    @Query("SELECT * FROM ingredientUse WHERE post = :post")
+    fun getIngredientUse(post: String): Flow<List<IngredientUse>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIngredientUse(ingredientUse: IngredientUse)

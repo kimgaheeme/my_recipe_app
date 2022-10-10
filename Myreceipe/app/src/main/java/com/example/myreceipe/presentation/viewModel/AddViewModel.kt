@@ -49,29 +49,6 @@ class AddViewModel @Inject constructor(
     val eventFlow = _eventFlow.asSharedFlow()
 
 
-    init {
-        savedStateHandle.get<String>("title")?.let { it ->
-            if(it != "") {
-                viewModelScope.launch {
-                    postUseCase.getPostDetail(it)?.also { post ->
-                        _title.value = title.value.copy(
-                            text = post.title,
-                            isHintVisible = false
-                        )
-                        _content.value = content.value.copy(
-                            text = post.content,
-                            isHintVisible = false
-                        )
-                        _link.value = link.value.copy(
-                            text = post.link,
-                            isHintVisible = false
-                        )
-                    }
-                }
-            }
-        }
-    }
-
     fun onEvent(event: AddPostEvent) {
         when(event) {
             is AddPostEvent.EnteredTitle -> {

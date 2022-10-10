@@ -12,7 +12,7 @@ interface PostDao {
     fun getPost(): Flow<List<Post>>
 
     @Query("SELECT * FROM post WHERE title LIKE :title")
-    fun getPostByTitle(title: String): Post?
+    fun getPostByTitle(title: String): Flow<Post?>
 
 
     @Query(

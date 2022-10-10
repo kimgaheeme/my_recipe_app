@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.Flow
 class IngredientUseRepositoryImpl(
     private val dao: IngredientUseDao
     ): IngredientUseRepository {
-    override fun getIngredientUse(): Flow<List<IngredientUse>> {
-        return dao.getIngredientUse()
+    override fun getIngredientUse(post: String): Flow<List<IngredientUse>> {
+        return dao.getIngredientUse(post)
     }
 
     override suspend fun insertIngredientUse(ingredientUse: IngredientUse) {

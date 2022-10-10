@@ -45,7 +45,7 @@ fun Home(
     val viewModel = hiltViewModel<PostViewModel>()
     val state by viewModel.state
     var post by viewModel.post
-    Log.d("가희", post.toString())
+
     val filter by viewModel.filter
     val ingredient by viewModel.ingredient
 
