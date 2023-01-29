@@ -89,7 +89,7 @@ fun AddPost(
             LazyColumn() {
                 item {
                     //제목
-                    SubTitleText(text = "Title",2.dp)
+                    SubTitleText(text = "음식 제목",2.dp)
                     MyTextField(
                         value = title.text,
                         onValueChange = { viewModel.onEvent(AddPostEvent.EnteredTitle(it)) },
@@ -98,16 +98,16 @@ fun AddPost(
                     Spacer(modifier = Modifier.size(20.dp))
 
                     //재료
-                    SubTitleText(text = "Ingredient", 2.dp)
+                    SubTitleText(text = "재료", 2.dp)
                     MyTextField(
                         value = ingredient.text,
                         onValueChange = { viewModel.onEvent(AddPostEvent.EnteredIngredient(it)) },
-                        placeholder = "재료를 입력하세요"
+                        placeholder = "재료/개수,재료/개수 형태로 입력하세요 \n예)양파/1개,고구마/2개"
                     )
                     Spacer(modifier = Modifier.size(20.dp))
 
                     //콘텐츠
-                    SubTitleText(text = "How",2.dp)
+                    SubTitleText(text = "조리 방법",2.dp)
                     MyTextField(
                         value = content.text,
                         onValueChange = { viewModel.onEvent(AddPostEvent.EnteredContent(it)) },
@@ -119,7 +119,7 @@ fun AddPost(
 
 
                     //링크
-                    SubTitleText(text = "Link", 2.dp)
+                    SubTitleText(text = "참고 자료", 2.dp)
                     MyTextField(
                         value = link.text,
                         onValueChange = {  viewModel.onEvent(AddPostEvent.EnteredLink(it)) },

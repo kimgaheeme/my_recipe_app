@@ -12,7 +12,7 @@ class PostRepositoryImpl(
         return dao.getPost()
     }
 
-    override fun getPostByTitle(title: String): Post? {
+    override fun getPostByTitle(title: String): Flow<Post?> {
         return dao.getPostByTitle(title)
     }
 

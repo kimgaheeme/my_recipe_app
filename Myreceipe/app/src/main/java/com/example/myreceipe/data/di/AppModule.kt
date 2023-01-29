@@ -10,6 +10,7 @@ import com.example.myreceipe.domain.usecase.post.AddPost
 import com.example.myreceipe.domain.repository.IngredientRepository
 import com.example.myreceipe.domain.repository.IngredientUseRepository
 import com.example.myreceipe.domain.repository.PostRepository
+import com.example.myreceipe.domain.usecase.ingredient.IngredientUseUseCase
 import com.example.myreceipe.domain.usecase.post.*
 import dagger.Module
 import dagger.Provides
@@ -64,7 +65,8 @@ object AppModule {
             addIngredient = AddIngredientUseCase(repository),
             addIngredientUse = AddIngredientUseUseCase(repository2),
             deleteIngredient = DeleteIngredientUseCase(repository),
-            getIngredientUseCase = GetIngredientUseCase(repository)
+            getIngredientUseCase = GetIngredientUseCase(repository),
+            getIngredientUseUseCase = IngredientUseUseCase(repository2)
         )
     }
 
